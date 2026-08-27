@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#16a085">
+
+    <meta name="description"
+          content="Pharmacy Manager V2 - نظام إدارة الصيدلية">
+
+    <title>Pharmacy Manager V2</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            💊
+        </div>
+
+        <div>
+
+            <h1 id="headerPharmacyName">
+                صيدليتي
+            </h1>
+
+            <p>
+                نظام إدارة الصيدلية
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <button
+        id="darkModeBtn"
+        class="icon-btn"
+        type="button"
+        title="الوضع الليلي">
+
+        🌙
+
+    </button>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="container">
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section
+    id="dashboardSection"
+    class="page active">
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                لوحة التحكم
+            </h2>
+
+            <p>
+                نظرة شاملة على حالة الصيدلية
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         STATISTICS
+    ========================= -->
+
+    <div class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💊
+            </div>
+
+            <div>
+
+                <span>
+                    إجمالي الأدوية
+                </span>
+
+                <strong id="totalMedicines">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📦
+            </div>
+
+            <div>
+
+                <span>
+                    إجمالي المخزون
+                </span>
+
+                <strong id="totalStock">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card warning">
+
+            <div class="stat-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <span>
+                    مخزون منخفض
+                </span>
+
+                <strong id="lowStock">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card danger">
+
+            <div class="stat-icon">
+                ⏰
+            </div>
+
+            <div>
+
+                <span>
+                    انتهاء قريب
+                </span>
+
+                <strong id="expiringSoon">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card danger">
+
+            <div class="stat-icon">
+                🔴
+            </div>
+
+            <div>
+
+                <span>
+                    منتهية الصلاحية
+                </span>
+
+                <strong id="expiredMedicines">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card success">
+
+            <div class="stat-icon">
+                💰
+            </div>
+
+            <div>
+
+                <span>
+                    مبيعات اليوم
+                </span>
+
+                <strong id="todaySales">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📅
+            </div>
+
+            <div>
+
+                <span>
+                    مبيعات الشهر
+                </span>
+
+                <strong id="monthSales">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card success">
+
+            <div class="stat-icon">
+                💎
+            </div>
+
+            <div>
+
+                <span>
+                    قيمة المخزون
+                </span>
+
+                <strong id="stockValue">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         QUICK ACTIONS
+    ========================= -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+                ⚡ إجراءات سريعة
+            </h3>
+
+        </div>
+
+
+        <div class="quick-actions">
+
+            <button
+                class="quick-btn"
+                onclick="openMedicineModal()">
+
+                <span>
+                    ➕
+                </span>
+
+                <strong>
+                    إضافة دواء
+                </strong>
+
+            </button>
+
+
+            <button
+                class="quick-btn"
+                onclick="showPage('salesSection')">
+
+                <span>
+                    💰
+                </span>
+
+                <strong>
+                    تسجيل بيع
+                </strong>
+
+            </button>
+
+
+            <button
+                class="quick-btn"
+                onclick="showPage('reportsSection')">
+
+                <span>
+                    📊
+                </span>
+
+                <strong>
+                    التقارير
+                </strong>
+
+            </button>
+
+
+            <button
+                class="quick-btn"
+                onclick="exportBackup()">
+
+                <span>
+                    📤
+                </span>
+
+                <strong>
+                    نسخة احتياطية
+                </strong>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         RECENT MEDICINES
+    ========================= -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+                💊 آخر الأدوية المضافة
+            </h3>
+
+            <button
+                class="small-btn"
+                onclick="showPage('medicinesSection')">
+
+                عرض الكل
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="recentMedicines"
+            class="medicine-list">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         ALERTS
+    ========================= -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+                🔔 التنبيهات
+            </h3>
+
+        </div>
+
+
+        <div id="alertsContainer">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MEDICINES
+===================================================== -->
+
+<section
+    id="medicinesSection"
+    class="page">
+
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                💊 الأدوية
+            </h2>
+
+            <p>
+                إدارة مخزون الأدوية
+            </p>
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="openMedicineModal()">
+
+            ＋ إضافة دواء
+
+        </button>
+
+    </div>
+
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <span>
+            🔍
+        </span>
+
+        <input
+            type="search"
+            id="medicineSearch"
+            placeholder="ابحث عن اسم الدواء أو الشركة...">
+
+    </div>
+
+
+
+    <!-- FILTERS -->
+
+    <div class="filter-bar">
+
+        <button
+            class="filter-btn active"
+            data-filter="all"
+            onclick="setMedicineFilter('all')">
+
+            الكل
+
+        </button>
+
+
+        <button
+            class="filter-btn"
+            data-filter="available"
+            onclick="setMedicineFilter('available')">
+
+            متوفر
+
+        </button>
+
+
+        <button
+            class="filter-btn"
+            data-filter="low"
+            onclick="setMedicineFilter('low')">
+
+            مخزون منخفض
+
+        </button>
+
+
+        <button
+            class="filter-btn"
+            data-filter="expired"
+            onclick="setMedicineFilter('expired')">
+
+            منتهي
+
+        </button>
+
+
+        <button
+            class="filter-btn"
+            data-filter="expiring"
+            onclick="setMedicineFilter('expiring')">
+
+            قرب الانتهاء
+
+        </button>
+
+    </div>
+
+
+
+    <div
+        id="medicinesContainer"
+        class="medicine-grid">
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SALES
+===================================================== -->
+
+<section
+    id="salesSection"
+    class="page">
+
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                💰 المبيعات
+            </h2>
+
+            <p>
+                تسجيل ومتابعة عمليات البيع
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SALES SUMMARY -->
+
+    <div class="sales-summary">
+
+
+        <div>
+
+            <span>
+                مبيعات اليوم
+            </span>
+
+            <strong id="salesTodayTotal">
+                0
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                عدد عمليات اليوم
+            </span>
+
+            <strong id="salesCount">
+                0
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                وحدات مباعة اليوم
+            </span>
+
+            <strong id="salesUnitsToday">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SALE FORM -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+                🧾 تسجيل بيع جديد
+            </h3>
+
+        </div>
+
+
+        <form id="saleForm">
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label for="saleMedicine">
+                        الدواء *
+                    </label>
+
+                    <select
+                        id="saleMedicine"
+                        required>
+
+                        <option value="">
+                            اختر الدواء
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="saleQuantity">
+                        الكمية *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="saleQuantity"
+                        min="1"
+                        value="1"
+                        required>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="salePreview"
+                class="sale-preview">
+
+                اختر دواء لمعرفة إجمالي البيع
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="primary-btn full">
+
+                💰 تسجيل البيع
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <!-- SALES HISTORY -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+                📋 سجل المبيعات
+            </h3>
+
+            <button
+                class="small-btn"
+                onclick="clearSales()">
+
+                مسح السجل
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="salesList"
+            class="sales-list">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     REPORTS
+===================================================== -->
+
+<section
+    id="reportsSection"
+    class="page">
+
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                📊 التقارير
+            </h2>
+
+            <p>
+                تحليل المبيعات والمخزون
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- REPORT FILTER -->
+
+    <div class="panel">
+
+        <div class="form-grid">
+
+
+            <div class="form-group">
+
+                <label>
+                    من تاريخ
+                </label>
+
+                <input
+                    type="date"
+                    id="reportFrom">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    إلى تاريخ
+                </label>
+
+                <input
+                    type="date"
+                    id="reportTo">
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="primary-btn full"
+            onclick="generateReport()">
+
+            📊 إنشاء التقرير
+
+        </button>
+
+    </div>
+
+
+
+    <!-- REPORT RESULT -->
+
+    <div
+        id="reportResult"
+        class="report-result">
+
+    </div>
+
+
+
+    <!-- TOP MEDICINES -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+                🏆 أكثر الأدوية مبيعًا
+            </h3>
+
+        </div>
+
+
+        <div
+            id="topMedicines"
+            class="top-medicines">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SETTINGS
+===================================================== -->
+
+<section
+    id="settingsSection"
+    class="page">
+
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                ⚙️ الإعدادات
+            </h2>
+
+            <p>
+                إعدادات نظام الصيدلية
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- GENERAL SETTINGS -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+                🏪 معلومات الصيدلية
+            </h3>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="pharmacyName">
+                اسم الصيدلية
+            </label>
+
+            <input
+                type="text"
+                id="pharmacyName"
+                placeholder="مثال: صيدلية الشفاء">
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label for="ownerName">
+                اسم المالك
+            </label>
+
+            <input
+                type="text"
+                id="ownerName"
+                placeholder="اسم المالك">
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label for="currency">
+                العملة
+            </label>
+
+            <input
+                type="text"
+                id="currency"
+                placeholder="مثال: XAF">
+
+        </div>
+
+
+
+        <button
+            class="primary-btn full"
+            onclick="saveSettings()">
+
+            💾 حفظ الإعدادات
+
+        </button>
+
+    </div>
+
+
+
+    <!-- BACKUP -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+                💾 النسخ الاحتياطي
+            </h3>
+
+        </div>
+
+
+        <p class="panel-description">
+
+            احفظ نسخة من بيانات الأدوية والمبيعات
+            لاستعادتها لاحقًا أو نقلها إلى جهاز آخر.
+
+        </p>
+
+
+        <div class="backup-actions">
+
+
+            <button
+                class="secondary-btn"
+                onclick="exportBackup()">
+
+                📤 تصدير البيانات
+
+            </button>
+
+
+            <label
+                class="secondary-btn file-btn">
+
+                📥 استعادة البيانات
+
+                <input
+                    type="file"
+                    id="backupFile"
+                    accept=".json"
+                    hidden>
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- DARK MODE -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+                🌙 المظهر
+            </h3>
+
+        </div>
+
+
+        <button
+            class="secondary-btn full"
+            onclick="toggleDarkMode()">
+
+            تبديل الوضع الليلي
+
+        </button>
+
+    </div>
+
+
+
+    <!-- DANGER -->
+
+    <div class="panel danger-panel">
+
+        <h3>
+            ⚠️ منطقة الخطر
+        </h3>
+
+        <p>
+            حذف جميع بيانات الصيدلية من هذا الجهاز.
+            لا يمكن التراجع عن هذه العملية.
+        </p>
+
+
+        <button
+            class="danger-btn"
+            onclick="deleteAllData()">
+
+            🗑️ حذف جميع البيانات
+
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     BOTTOM NAVIGATION
+===================================================== -->
+
+<nav class="bottom-nav">
+
+
+    <button
+        class="nav-btn active"
+        data-page="dashboardSection"
+        onclick="showPage('dashboardSection')">
+
+        <span>
+            🏠
+        </span>
+
+        <small>
+            الرئيسية
+        </small>
+
+    </button>
+
+
+
+    <button
+        class="nav-btn"
+        data-page="medicinesSection"
+        onclick="showPage('medicinesSection')">
+
+        <span>
+            💊
+        </span>
+
+        <small>
+            الأدوية
+        </small>
+
+    </button>
+
+
+
+    <button
+        class="nav-btn"
+        data-page="salesSection"
+        onclick="showPage('salesSection')">
+
+        <span>
+            💰
+        </span>
+
+        <small>
+            المبيعات
+        </small>
+
+    </button>
+
+
+
+    <button
+        class="nav-btn"
+        data-page="reportsSection"
+        onclick="showPage('reportsSection')">
+
+        <span>
+            📊
+        </span>
+
+        <small>
+            التقارير
+        </small>
+
+    </button>
+
+
+
+    <button
+        class="nav-btn"
+        data-page="settingsSection"
+        onclick="showPage('settingsSection')">
+
+        <span>
+            ⚙️
+        </span>
+
+        <small>
+            الإعدادات
+        </small>
+
+    </button>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MEDICINE MODAL
+===================================================== -->
+
+<div
+    id="medicineModal"
+    class="modal">
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="modalTitle">
+                    إضافة دواء
+                </h2>
+
+                <p>
+                    أدخل معلومات الدواء
+                </p>
+
+            </div>
+
+
+            <button
+                class="close-btn"
+                onclick="closeMedicineModal()"
+                type="button">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <form id="medicineForm">
+
+
+            <input
+                type="hidden"
+                id="medicineId">
+
+
+
+            <div class="form-group">
+
+                <label for="medicineName">
+                    اسم الدواء *
+                </label>
+
+                <input
+                    type="text"
+                    id="medicineName"
+                    required
+                    placeholder="مثال: Panadol">
+
+            </div>
+
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label for="medicineQuantity">
+                        الكمية *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="medicineQuantity"
+                        min="0"
+                        required
+                        placeholder="0">
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="medicinePrice">
+                        سعر الوحدة *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="medicinePrice"
+                        min="0"
+                        step="0.01"
+                        required
+                        placeholder="0">
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="medicineExpiry">
+                    تاريخ انتهاء الصلاحية
+                </label>
+
+                <input
+                    type="date"
+                    id="medicineExpiry">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="medicineCompany">
+                    الشركة المصنعة
+                </label>
+
+                <input
+                    type="text"
+                    id="medicineCompany"
+                    placeholder="اسم الشركة">
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="medicineMinStock">
+                    الحد الأدنى للمخزون
+                </label>
+
+                <input
+                    type="number"
+                    id="medicineMinStock"
+                    min="0"
+                    value="10">
+
+            </div>
+
+
+
+            <div class="modal-actions">
+
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeMedicineModal()">
+
+                    إلغاء
+
+                </button>
+
+
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+
+                    💾 حفظ الدواء
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     STOCK MODAL
+===================================================== -->
+
+<div
+    id="stockModal"
+    class="modal">
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>
+                    📦 إضافة مخزون
+                </h2>
+
+                <p>
+                    إضافة كمية جديدة إلى المخزون
+                </p>
+
+            </div>
+
+
+            <button
+                class="close-btn"
+                onclick="closeStockModal()"
+                type="button">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <form id="stockForm">
+
+
+            <input
+                type="hidden"
+                id="stockMedicineId">
+
+
+
+            <div class="stock-info">
+
+                <span>
+                    الدواء
+                </span>
+
+                <strong id="stockMedicineName">
+                    —
+                </strong>
+
+            </div>
+
+
+
+            <div class="stock-info">
+
+                <span>
+                    المخزون الحالي
+                </span>
+
+                <strong id="currentStock">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="stockQuantity">
+                    الكمية المراد إضافتها *
+                </label>
+
+                <input
+                    type="number"
+                    id="stockQuantity"
+                    min="1"
+                    value="1"
+                    required>
+
+            </div>
+
+
+
+            <div class="modal-actions">
+
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="closeStockModal()">
+
+                    إلغاء
+
+                </button>
+
+
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+
+                    📦 إضافة للمخزون
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="script.js"></script>
+
+</body>
+          </html>
